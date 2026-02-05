@@ -1,0 +1,25 @@
+# fastapi_app/services/llm.py
+import requests
+
+def get_ai_reply(user_text: str, target_language="English") -> str:
+    prompt = f"""
+You are a friendly language tutor.
+Reply in {target_language}.
+Correct the user's grammar politely.
+Ask a follow-up question.
+
+User: {user_text}
+"""
+
+    resp = requests.post(
+        "http://localhost:11434/api/generate",
+        json={
+            "model": "llama3",
+            "prompt": prompt,
+            "stream": False
+        },
+        timeout=120
+    )
+
+    data = resp.json()
+    return data["response"]

@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+openai
+torch
+openai-whisper
+gtts
+python-multipart
